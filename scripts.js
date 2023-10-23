@@ -75,7 +75,24 @@ let rounds = [
     { letter: "T", category: "things you'd find in a kitchen", answers: ["teapot", "thermometer", "tongs", "tablespoon", "toaster", "tap", "turnip", "teatowel", "teaspoon", "tea strainer"] },
     { letter: "N", category: "countries", answers: ["Nepal", "Nicaragua", "Namibia", "Norway", "Netherlands", "New Zealand", "Niger"] },
     { letter: "J", category: "books of the Bible", answers: ["Job", "Jeremiah", "James", "Joel", "Jonah", "John", "Joshua", "Jude", "Judges", "1 John", "2 John", "3 John"] },
-    //{ letter: }
+    { letter: "B", category: "Disney characters", answers: ["Baloo", "Bambi", "Bashful", "Belle", "Beast", "Bolt", "Bruno", "Bullseye", "Bruce", "Buzz Lightyear", "Buster"] },
+    { letter: "M", category: "Disney characters", answers: ["Mary Poppins", "Mad Hatter", "Marlin", "Maui", "Moana", "Merida", "Mickey Mouse", "Minnie Mouse", "Mowgli", "Mulan", "Mushu"] },
+    { letter: "B", category: "fruits", answers: ["banana", "blueberry", "blackberry", "blackcurrant", "boysenberry", "buddha's hand"] },
+    { letter: "S", category: "items of clothing", answers: ["shirt", "swim suit", "sweater", "shorts", "sun dress", "scarf", "suit", "socks", "sombrero"] },
+    { letter: "A", category: "countries", answers: ["Afghanistan", "Andorra", "Algeria", "Australia", "Austria", "Armenia", "Albania"] },
+    { letter: "B", category: "countries", answers: ["Bahamas", "Barbados", "Belarus", "Belgium", "Benin", "Bolivia", "Brazil", "Bulgaria", "Burundi"] },
+    { letter: "S", category: "countries", answers: ["Senegal", "Sierra Leone", "Slovenia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Sweden", "Switzerland"] },
+    { letter: "C", category: "UK cities", answers: ["Cambridge", "Canterbury", "Cardiff", "Carlisle", "Chelmsford", "Chester", "Chichister", "Colchester", "Coventry"] },
+    { letter: "B", category: "UK Cities", answers: ["Bangor", "Bath", "Belfast", "Birmingham", "Bradford", "Brighton & Hove", "Bristol"] },
+    { letter: "B", category: "animals", answers: ["bee", "beaver", "beetle", "boar", "buffalo", "bull", "butterfly", "badger", "bear", "bat"] },
+    { letter: "P", category: "animals", answers: ["panther", "parrot", "panda", "partridge", "penguin", "pig", "pigeon", "polar bear", "pony", "porpoise", "porcupine"] },
+    { letter: "", category: "", answers: [] },
+    { letter: "", category: "", answers: [] },
+    { letter: "", category: "", answers: [] },
+    { letter: "", category: "", answers: [] },
+    { letter: "", category: "", answers: [] },
+/*    { letter: "", category: "", answers: [] },*/
+
 ];
 
 

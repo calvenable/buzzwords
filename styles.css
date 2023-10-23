@@ -52,14 +52,14 @@ body {
     font-size: 6vw;
     top: 40%;
     opacity: 100;
-    transition: opacity 2s;
+    transition: opacity 1s;
 }
 
 #waiting-elements p {
     font-size: 4vw;
     top: 70%;
     opacity: 100;
-    transition: opacity 2s;
+    transition: opacity 1s;
     color: #FFFFFF;
 }
 
@@ -69,7 +69,7 @@ body {
     margin-bottom: 0px;
     top: 4vh;
     opacity: 100;
-    transition: opacity 2s;
+    transition: opacity 1s;
 }
 
 #category {
@@ -78,7 +78,7 @@ body {
     margin-bottom: 0px;
     top: 70%;
     opacity: 100;
-    transition: opacity 2s;
+    transition: opacity 1s;
     color: #FFFFFF;
 }
 
@@ -87,12 +87,18 @@ body {
 }
 
 #possibleAnswers {
+    margin-top: 80px;
     font-size: 3vw;
-    top: 170px;
+    opacity: 100;
+    transition: opacity 2s;
 }
 
 #answerList {
-    font-size: 4vw;
-    top: 300px;
+    font-size: 3.5vw;
+    width: 80% !important;
+    left: 10% !important;
+    position: fixed;
     color: #FFFFFF;
+    opacity: 100;
+    transition: opacity 2s;
 }

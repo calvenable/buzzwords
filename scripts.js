@@ -16,10 +16,13 @@ const rounds = [
     { letter: "B", category: "UK Cities", answers: ["Bangor", "Bath", "Belfast", "Birmingham", "Bradford", "Brighton & Hove", "Bristol"] },
     { letter: "B", category: "animals", answers: ["bee", "beaver", "beetle", "boar", "buffalo", "bull", "butterfly", "badger", "bear", "bat"] },
     { letter: "P", category: "animals", answers: ["panther", "parrot", "panda", "partridge", "penguin", "pig", "pigeon", "polar bear", "pony", "porpoise", "porcupine"] },
-    /*    { letter: "", category: "", answers: [] },*/
-
+    { letter: "M", category: "car makes/models", answers: ["McLaren", "Mitsubishi", "Mini", "Mercedes-Benz", "Mazda", "Maserati", "Malibu (Chevrolet)", "Maverick (Ford)", "Model S (Tesla)"] },
+    { letter: "A", category: "colours", answers: ["aqua", "amethyst", "amber", "apricot", "arctic lime", "ash grey", "azure"] },
+    { letter: "M", category: "colours", answers: ["mint", "mustard", "mango", "midnight blue", "mauve", "magenta", "magnolia"] },
+    { letter: "B", category: "sports", answers: ["bobsled", "boxing", "basketball", "baseball", "badminton", "biathlon"] },
+    { letter: "S", category: "sports", answers: ["skiing", "snowboarding", "swimming", "surfing", "sumo wrestling", "squash", "soccer", "shooting", "sailing", "scuba diving"] },
 ];
-
+// swing, slide, seagull, seat, 
 
 //let categories = [
 //    'fruits',

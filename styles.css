@@ -6,10 +6,7 @@ body {
 #footer p {
     color: #FFFFFF;
     font-size: 2.5vw;
-    position: fixed;
     bottom: 10%;
-    width: 100%;
-    text-align: center;
     opacity: 100;
     transition: opacity .5s;
 }
@@ -43,4 +40,59 @@ body {
 }
 .hidden {
     opacity: 0 !important;
+}
+
+#waiting-elements, #game-elements, #answer-elements, #footer p {
+    text-align: center;
+    position: fixed;
+    width: 100%;
+}
+
+#intro {
+    font-size: 6vw;
+    top: 40%;
+    opacity: 100;
+    transition: opacity 2s;
+}
+
+#waiting-elements p {
+    font-size: 4vw;
+    top: 70%;
+    opacity: 100;
+    transition: opacity 2s;
+    color: #FFFFFF;
+}
+
+#big-letter {
+    font-size: 12vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    top: 4vh;
+    opacity: 100;
+    transition: opacity 2s;
+}
+
+#category {
+    font-size: 7vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    top: 70%;
+    opacity: 100;
+    transition: opacity 2s;
+    color: #FFFFFF;
+}
+
+#answer-elements {
+    top: 50%;
+}
+
+#possibleAnswers {
+    font-size: 3vw;
+    top: 170px;
+}
+
+#answerList {
+    font-size: 4vw;
+    top: 300px;
+    color: #FFFFFF;
 }

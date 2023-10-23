@@ -1,3 +1,47 @@
+const rounds = [
+    { letter: "T", category: "items of clothing", answers: ["tank top", "trousers", "turtleneck", "t-shirt", "trenchcoat", "tuxedo", "tie", "tunic", "tights", "thong"] },
+    { letter: "H", category: "animals", answers: ["humpback whale", "hamster", "hyena", "hare", "hedgehog", "hippopotamus", "hermit crab", "heron", "hammerhead shark"] },
+    { letter: "L", category: "body parts", answers: ["leg", "luns", "liver", "large intestine", "loin", "lobe", "lower jaw", "larynx"] },
+    { letter: "T", category: "things you'd find in a kitchen", answers: ["teapot", "thermometer", "tongs", "tablespoon", "toaster", "tap", "turnip", "teatowel", "teaspoon", "tea strainer"] },
+    { letter: "N", category: "countries", answers: ["Nepal", "Nicaragua", "Namibia", "Norway", "Netherlands", "New Zealand", "Niger"] },
+    { letter: "J", category: "books of the Bible", answers: ["Job", "Jeremiah", "James", "Joel", "Jonah", "John", "Joshua", "Jude", "Judges", "1 John", "2 John", "3 John"] },
+    { letter: "B", category: "Disney characters", answers: ["Baloo", "Bambi", "Bashful", "Belle", "Beast", "Bolt", "Bruno", "Bullseye", "Bruce", "Buzz Lightyear", "Buster"] },
+    { letter: "M", category: "Disney characters", answers: ["Mary Poppins", "Mad Hatter", "Marlin", "Maui", "Moana", "Merida", "Mickey Mouse", "Minnie Mouse", "Mowgli", "Mulan", "Mushu"] },
+    { letter: "B", category: "fruits", answers: ["banana", "blueberry", "blackberry", "blackcurrant", "boysenberry", "buddha's hand"] },
+    { letter: "S", category: "items of clothing", answers: ["shirt", "swim suit", "sweater", "shorts", "sun dress", "scarf", "suit", "socks", "sombrero"] },
+    { letter: "A", category: "countries", answers: ["Afghanistan", "Andorra", "Algeria", "Australia", "Austria", "Armenia", "Albania"] },
+    { letter: "B", category: "countries", answers: ["Bahamas", "Barbados", "Belarus", "Belgium", "Benin", "Bolivia", "Brazil", "Bulgaria", "Burundi"] },
+    { letter: "S", category: "countries", answers: ["Senegal", "Sierra Leone", "Slovenia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Sweden", "Switzerland"] },
+    { letter: "C", category: "UK cities", answers: ["Cambridge", "Canterbury", "Cardiff", "Carlisle", "Chelmsford", "Chester", "Chichister", "Colchester", "Coventry"] },
+    { letter: "B", category: "UK Cities", answers: ["Bangor", "Bath", "Belfast", "Birmingham", "Bradford", "Brighton & Hove", "Bristol"] },
+    { letter: "B", category: "animals", answers: ["bee", "beaver", "beetle", "boar", "buffalo", "bull", "butterfly", "badger", "bear", "bat"] },
+    { letter: "P", category: "animals", answers: ["panther", "parrot", "panda", "partridge", "penguin", "pig", "pigeon", "polar bear", "pony", "porpoise", "porcupine"] },
+    /*    { letter: "", category: "", answers: [] },*/
+
+];
+
+
+//let categories = [
+//    'fruits',
+//    'items of clothing',
+//    'countries',
+//    'British cities',
+//    'items of clothing',
+//    'animals',
+//    'body parts',
+//    'car makes/models',
+//    'things you\'d find in a kitchen',
+//    'things you\'d find in a park',
+//    'famous actors (surname)',
+//    'cartoon characters',
+//    'colours',
+//    'items of furniture',
+//    'beverages (drinks)',
+//    'foods',
+//    'sports',
+//    'books of the Bible'];
+
+
 const State = {
     Menu: 1,
     Intro: 2,
@@ -6,9 +50,14 @@ const State = {
     Answers: 5
 };
 let pageState = State.Menu;
-initialiseProbs();
 
-document.addEventListener("keypress", (event) => {handleKeyPress(event);});
+let currentRound;
+let availableRounds = [];
+for (let i = 0; i < rounds.length; i++) {
+    availableRounds.push(rounds[i]);
+}
+
+document.addEventListener("keypress", (event) => { handleKeyPress(event); });
 
 function handleKeyPress(event) {
     switch (event.key) {
@@ -16,9 +65,6 @@ function handleKeyPress(event) {
         case " ":
             advancePageState();
         break;
-        default:
-            console.log("Letter: " + generateLetter());
-            console.log("Category: " + generateCategory());
   }
 }
 
@@ -27,12 +73,33 @@ function advancePageState() {
         case State.Menu:
             titleVisible(false);
             hideElementsIn("footer");
-            pageState = State.Intro;
+            showElementsIn("waiting-elements");
+            pageState = State.Waiting;
             break;
-        case State.Intro:
-            titleVisible(true);
-            showElementsIn("footer");
-            pageState = State.Menu;
+
+        // case State.Intro:
+
+        case State.Waiting:
+            hideElementsIn("waiting-elements");
+            if (selectRound()) {
+                runSelectionAnimation();
+                pageState = State.RoundInProgress;
+            }
+            else {
+                // Handle no rounds remaining
+            }
+            break;
+
+        case State.RoundInProgress:
+            showElementsIn("answer-elements");
+            pageState = State.Answers;
+            break;
+
+        case State.Answers:
+            hideElementsIn("game-elements");
+            hideElementsIn("answer-elements");
+            showElementsIn("waiting-elements");
+            pageState = State.Waiting;
             break;
 
     }
@@ -64,54 +131,32 @@ function hideElementsIn(divID) {
 }
 
 
-function selectRound() {
-    return rounds[Math.floor(Math.random() * rounds.length)];
+function runSelectionAnimation() {
+    document.getElementById("big-letter").innerText = currentRound.letter;
+    document.getElementById("category").innerText = currentRound.category;
+    let answerList = currentRound.answers;
+    let answerString = "";
+    for (let i = 0; i < answerList.length; i++) {
+        if (i === answerList.length - 1) {
+            answerString += "or " + answerList[i];
+        }
+        else {
+            answerString += answerList[i] + ", ";
+        }
+    }
+    document.getElementById("answerList").innerText = answerString;
+    showElementsIn("game-elements");
 }
 
-let rounds = [
-    { letter: "T", category: "items of clothing", answers: ["tank top", "trousers", "turtleneck", "t-shirt", "trenchcoat", "tuxedo", "tie", "tunic", "tights", "thong"] },
-    { letter: "H", category: "animals", answers: ["humpback whale", "hamster", "hyena", "hare", "hedgehog", "hippopotamus", "hermit crab", "heron", "hammerhead shark"] },
-    { letter: "L", category: "body parts", answers: ["leg", "luns", "liver", "large intestine", "loin", "lobe", "lower jaw", "larynx"] },
-    { letter: "T", category: "things you'd find in a kitchen", answers: ["teapot", "thermometer", "tongs", "tablespoon", "toaster", "tap", "turnip", "teatowel", "teaspoon", "tea strainer"] },
-    { letter: "N", category: "countries", answers: ["Nepal", "Nicaragua", "Namibia", "Norway", "Netherlands", "New Zealand", "Niger"] },
-    { letter: "J", category: "books of the Bible", answers: ["Job", "Jeremiah", "James", "Joel", "Jonah", "John", "Joshua", "Jude", "Judges", "1 John", "2 John", "3 John"] },
-    { letter: "B", category: "Disney characters", answers: ["Baloo", "Bambi", "Bashful", "Belle", "Beast", "Bolt", "Bruno", "Bullseye", "Bruce", "Buzz Lightyear", "Buster"] },
-    { letter: "M", category: "Disney characters", answers: ["Mary Poppins", "Mad Hatter", "Marlin", "Maui", "Moana", "Merida", "Mickey Mouse", "Minnie Mouse", "Mowgli", "Mulan", "Mushu"] },
-    { letter: "B", category: "fruits", answers: ["banana", "blueberry", "blackberry", "blackcurrant", "boysenberry", "buddha's hand"] },
-    { letter: "S", category: "items of clothing", answers: ["shirt", "swim suit", "sweater", "shorts", "sun dress", "scarf", "suit", "socks", "sombrero"] },
-    { letter: "A", category: "countries", answers: ["Afghanistan", "Andorra", "Algeria", "Australia", "Austria", "Armenia", "Albania"] },
-    { letter: "B", category: "countries", answers: ["Bahamas", "Barbados", "Belarus", "Belgium", "Benin", "Bolivia", "Brazil", "Bulgaria", "Burundi"] },
-    { letter: "S", category: "countries", answers: ["Senegal", "Sierra Leone", "Slovenia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Sweden", "Switzerland"] },
-    { letter: "C", category: "UK cities", answers: ["Cambridge", "Canterbury", "Cardiff", "Carlisle", "Chelmsford", "Chester", "Chichister", "Colchester", "Coventry"] },
-    { letter: "B", category: "UK Cities", answers: ["Bangor", "Bath", "Belfast", "Birmingham", "Bradford", "Brighton & Hove", "Bristol"] },
-    { letter: "B", category: "animals", answers: ["bee", "beaver", "beetle", "boar", "buffalo", "bull", "butterfly", "badger", "bear", "bat"] },
-    { letter: "P", category: "animals", answers: ["panther", "parrot", "panda", "partridge", "penguin", "pig", "pigeon", "polar bear", "pony", "porpoise", "porcupine"] },
-    { letter: "", category: "", answers: [] },
-    { letter: "", category: "", answers: [] },
-    { letter: "", category: "", answers: [] },
-    { letter: "", category: "", answers: [] },
-    { letter: "", category: "", answers: [] },
-/*    { letter: "", category: "", answers: [] },*/
+function selectRound() {
+    if (availableRounds.length < 0) {
+        return false;
+    }
 
-];
+    let index = Math.floor(Math.random() * availableRounds.length);
+    currentRound = availableRounds[index];
+    availableRounds.splice(index, 1);
+    return true;
+}
 
 
-//let categories = [
-//    'fruits',
-//    'items of clothing',
-//    'countries',
-//    'British cities',
-//    'items of clothing',
-//    'animals',
-//    'body parts',
-//    'car makes/models',
-//    'things you\'d find in a kitchen',
-//    'things you\'d find in a park',
-//    'famous actors (surname)',
-//    'cartoon characters',
-//    'colours',
-//    'items of furniture',
-//    'beverages (drinks)',
-//    'foods',
-//    'sports',
-//    'books of the Bible'];

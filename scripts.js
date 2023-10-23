@@ -6,12 +6,12 @@ document.addEventListener("keypress", (event) => {handleKeyPress(event);});
 function handleKeyPress(event) {
   switch (event.Key) {
     case "Enter":
-      Console.log("Pressed enter!");
+      console.log("Pressed enter!");
       break;
     case "Space":
-      Console.log("Pressed space!");
+      console.log("Pressed space!");
       break;
     default:
-      Console.log("Pressed " + event.Key);
+      console.log("Pressed " + event.Key);
   }
 }

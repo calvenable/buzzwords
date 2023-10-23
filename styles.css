@@ -1,31 +1,46 @@
 body {
+    font-size: 100%;
     background-color: #FF8C1A;
+}
+
+#footer p {
+    color: #FFFFFF;
+    font-size: 2.5vw;
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    opacity: 100;
+    transition: opacity .5s;
 }
 
 #buzz {
     color: #FFFFFF;
-    font-size: 7em;
+    font-size: 10vw;
     position: fixed;
-    top: 40%;
-    left: 45%;
+    top: 15%;
+    left: 30%;
     opacity: 100;
     transition: left 1s, opacity .8s;
 }
 #words {
     color: #000000;
-    font-size: 7em;
+    font-size: 10vw;
     position: fixed;
-    top: 60%;
-    left: 55%;
+    top: 30%;
+    left: 45%;
     opacity: 100;
     transition: left 1s, opacity .8s;
 }
 
 .slideRight {
-    left: 70% !important;
+    left: 60% !important;
     opacity: 0 !important;
 }
 .slideLeft {
-    left: 30% !important;
+    left: 15% !important;
+    opacity: 0 !important;
+}
+.hidden {
     opacity: 0 !important;
 }

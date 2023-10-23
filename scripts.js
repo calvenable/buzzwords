@@ -1,32 +1,3 @@
-// Generator functions and properties
-const letters = ['T', 'A', 'O', 'I', 'S', 'W', 'C', 'B', 'P', 'H', 'F', 'M', 'D', 'E', 'R', 'L', 'N', 'G', 'U', 'K', 'V', 'Y', 'J', 'Q', 'X', 'Z'];
-const probs = [.16, .117, .076, .073, .067, .055, .052, .044, .043, .042, .04, .038, .032, .028, .028, .024, .023, .016, .012, .0086, .0082, .0076, .0051, .0022, .00045, .00045];
-let aggProbs = [];
-function initialiseProbs() {
-    let count = 0.0;
-    for (let i = 0; i < probs.length; i++) {
-        count += probs[i];
-        aggProbs[i] = count;
-    }
-}
-
-function generateLetter() {
-    var randValue = Math.random();
-    var index = 0;
-    while (aggProbs[index] < randValue) {
-        index++;
-    }
-    return letters[index];
-};
-
-
-function generateCategory() {
-    return categories[Math.floor(Math.random() * categories.length)];
-}
-
-
-
-// Actual program functionality
 const State = {
     Menu: 1,
     Intro: 2,
@@ -93,23 +64,37 @@ function hideElementsIn(divID) {
 }
 
 
+function selectRound() {
+    return rounds[Math.floor(Math.random() * rounds.length)];
+}
 
-let categories = [
-    'fruits',
-    'items of clothing',
-    'countries',
-    'British cities',
-    'items of clothing',
-    'animals',
-    'body parts',
-    'car makes/models',
-    'things you\'d find in a kitchen',
-    'things you\'d find in a park',
-    'famous actors (surname)',
-    'cartoon characters',
-    'colours',
-    'items of furniture',
-    'beverages (drinks)',
-    'foods',
-    'sports',
-    'books of the Bible'];
+let rounds = [
+    { letter: "T", category: "items of clothing", answers: ["tank top", "trousers", "turtleneck", "t-shirt", "trenchcoat", "tuxedo", "tie", "tunic", "tights", "thong"] },
+    { letter: "H", category: "animals", answers: ["humpback whale", "hamster", "hyena", "hare", "hedgehog", "hippopotamus", "hermit crab", "heron", "hammerhead shark"] },
+    { letter: "L", category: "body parts", answers: ["leg", "luns", "liver", "large intestine", "loin", "lobe", "lower jaw", "larynx"] },
+    { letter: "T", category: "things you'd find in a kitchen", answers: ["teapot", "thermometer", "tongs", "tablespoon", "toaster", "tap", "turnip", "teatowel", "teaspoon", "tea strainer"] },
+    { letter: "N", category: "countries", answers: ["Nepal", "Nicaragua", "Namibia", "Norway", "Netherlands", "New Zealand", "Niger"] },
+    { letter: "J", category: "books of the Bible", answers: ["Job", "Jeremiah", "James", "Joel", "Jonah", "John", "Joshua", "Jude", "Judges", "1 John", "2 John", "3 John"] },
+    //{ letter: }
+];
+
+
+//let categories = [
+//    'fruits',
+//    'items of clothing',
+//    'countries',
+//    'British cities',
+//    'items of clothing',
+//    'animals',
+//    'body parts',
+//    'car makes/models',
+//    'things you\'d find in a kitchen',
+//    'things you\'d find in a park',
+//    'famous actors (surname)',
+//    'cartoon characters',
+//    'colours',
+//    'items of furniture',
+//    'beverages (drinks)',
+//    'foods',
+//    'sports',
+//    'books of the Bible'];

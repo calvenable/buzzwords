@@ -1,7 +1,7 @@
 const rounds = [
     { letter: "T", category: "items of clothing", answers: ["tank top", "trousers", "turtleneck", "t-shirt", "trenchcoat", "tuxedo", "tie", "tunic", "tights", "thong"] },
     { letter: "H", category: "animals", answers: ["humpback whale", "hamster", "hyena", "hare", "hedgehog", "hippopotamus", "hermit crab", "heron", "hammerhead shark"] },
-    { letter: "L", category: "body parts", answers: ["leg", "luns", "liver", "large intestine", "loin", "lobe", "lower jaw", "larynx"] },
+    { letter: "L", category: "body parts", answers: ["leg", "lungs", "liver", "large intestine", "loin", "lobe", "lower jaw", "larynx"] },
     { letter: "T", category: "things you'd find in a kitchen", answers: ["teapot", "thermometer", "tongs", "tablespoon", "toaster", "tap", "turnip", "teatowel", "teaspoon", "tea strainer"] },
     { letter: "N", category: "countries", answers: ["Nepal", "Nicaragua", "Namibia", "Norway", "Netherlands", "New Zealand", "Niger"] },
     { letter: "J", category: "books of the Bible", answers: ["Job", "Jeremiah", "James", "Joel", "Jonah", "John", "Joshua", "Jude", "Judges", "1 John", "2 John", "3 John"] },
@@ -22,28 +22,6 @@ const rounds = [
     { letter: "B", category: "sports", answers: ["bobsled", "boxing", "basketball", "baseball", "badminton", "biathlon"] },
     { letter: "S", category: "sports", answers: ["skiing", "snowboarding", "swimming", "surfing", "sumo wrestling", "squash", "soccer", "shooting", "sailing", "scuba diving"] },
 ];
-// swing, slide, seagull, seat, 
-
-//let categories = [
-//    'fruits',
-//    'items of clothing',
-//    'countries',
-//    'British cities',
-//    'items of clothing',
-//    'animals',
-//    'body parts',
-//    'car makes/models',
-//    'things you\'d find in a kitchen',
-//    'things you\'d find in a park',
-//    'famous actors (surname)',
-//    'cartoon characters',
-//    'colours',
-//    'items of furniture',
-//    'beverages (drinks)',
-//    'foods',
-//    'sports',
-//    'books of the Bible'];
-
 
 const State = {
     Menu: 1,
@@ -62,6 +40,10 @@ for (let i = 0; i < rounds.length; i++) {
 
 document.addEventListener("keypress", (event) => { handleKeyPress(event); });
 
+/**
+ * Handles a key press by checking whether the key should trigger an action.
+ * @param {KeyboardEvent} event A keyboard event.
+ */
 function handleKeyPress(event) {
     switch (event.key) {
         case "Enter":
@@ -71,10 +53,13 @@ function handleKeyPress(event) {
   }
 }
 
+/**
+ * Increment the current state of the page and show/hide the appropriate elements.
+ */
 function advancePageState() {
     switch (pageState) {
         case State.Menu:
-            titleVisible(false);
+            setTitleVisibility(false);
             hideElementsIn("footer");
             showElementsIn("waiting-elements");
             pageState = State.Waiting;
@@ -108,8 +93,12 @@ function advancePageState() {
     }
 }
 
-function titleVisible(state) {
-    if (state) {
+/**
+ * Shows or hides the title/logo by applying the 'slideLeft' and 'slideRight' classes.
+ * @param {boolean} showTitle Whether to show or hide the title/logo.
+ */
+function setTitleVisibility(showTitle) {
+    if (showTitle) {
         document.getElementById("buzz").classList.remove("slideLeft");
         document.getElementById("words").classList.remove("slideRight");
     }
@@ -119,13 +108,20 @@ function titleVisible(state) {
     }
 }
 
+/**
+ * Removes the 'hidden' class to every child element of the element with given ID.
+ * @param {string} divID The ID of the element containing children to show.
+ */
 function showElementsIn(divID) {
     elements = document.getElementById(divID).children;
     [...elements].forEach(item => {
         item.classList.remove("hidden");
     });
 }
-
+/**
+ * Adds the 'hidden' class to every child element of the element with given ID.
+ * @param {string} divID The ID of the element containing children to hide.
+ */
 function hideElementsIn(divID) {
     elements = document.getElementById(divID).children;
     [...elements].forEach(item => {
@@ -138,6 +134,7 @@ function runSelectionAnimation() {
     document.getElementById("big-letter").innerText = currentRound.letter;
     document.getElementById("category").innerText = currentRound.category;
     let answerList = currentRound.answers;
+    shuffleArray(answerList);
     let answerString = "";
     for (let i = 0; i < answerList.length; i++) {
         if (i === answerList.length - 1) {
@@ -151,6 +148,10 @@ function runSelectionAnimation() {
     showElementsIn("game-elements");
 }
 
+/**
+ * Sets the value of currentRound to a randomly chosen unused round.
+ * @returns true if a round has been selected, false if no rounds remain.
+ */
 function selectRound() {
     if (availableRounds.length < 0) {
         return false;
@@ -162,4 +163,13 @@ function selectRound() {
     return true;
 }
 
-
+/**
+ * Shuffles the array in-place using a modified Fisher-Yates shuffle.
+ * @param {array} array The array to shuffle.
+ */
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
